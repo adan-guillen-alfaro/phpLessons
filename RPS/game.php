@@ -62,7 +62,7 @@
           {
             $hsel = $names[$h];
             $result = 'Human='.$hsel.' Computer='.$csel.' Result='.check($csel, $hsel);
-            $resultMessage = $resultMessage.'\n'.$result;
+            $resultMessage = $resultMessage.'<BR>'.$result;
           }
         }
       }
