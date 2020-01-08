@@ -29,7 +29,7 @@
 
     $md5 = hash('md5', $salt.$pwd);
 
-    echo "stored_hash: ".$stored_hash." md5: ".$md5;
+    //echo "<BR>stored_hash: ".$stored_hash." md5: ".$md5;
     if ($md5 === $stored_hash)
     {
       header("Location: game.php?name=".urlencode($user));
