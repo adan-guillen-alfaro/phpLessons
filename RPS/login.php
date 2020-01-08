@@ -10,23 +10,29 @@
   $pwd = isset($_POST['pass']) ? $_POST['pass'] : '';
 
   $usererror = '*';
-  if ($user === '')
-    $usererror = 'Invalid username';
-
   $pwderror = '*';
-  if ($pwd === '')
-    $pwderror = 'Invalid password';
+  if (isset($_POST['who']))
+  {
+    if ($user === '')
+      $usererror = 'Invalid username';
 
-  if ($pwderror === '*' && $usererror === '*')
+    if ($pwd === '')
+      $pwderror = 'Invalid password';
+
+      echo 'USER: '.$user.' PWD: '.$pwd;
+  }
+
+  if (strlen($user) > 0 && strlen($pwd) > 0)
   {
     $salt = 'XyZzy12*_';
     $stored_hash = '1a52e17fa899cf40fb04cfc42e6352f1'; // hash for a pwd = 'php123'
 
     $md5 = hash('md5', $salt.$pwd);
 
+    echo "stored_hash: ".$stored_hash." md5: ".$md5;
     if ($md5 === $stored_hash)
     {
-      header("Location: game.php?user=".urlencode($user));
+      header("Location: game.php?name=".urlencode($user));
     }
     else
       $pwderror = "Wrong password";

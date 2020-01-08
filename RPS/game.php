@@ -36,13 +36,13 @@
     return;
   }
 
-  $user = isset($_GET['name']) : $_GET['name'] : '';
+  $user = isset($_GET['name']) ? $_GET['name'] : '';
 
   if (strlen($user) < 1)
     die("Name parameter missing");
 
   $names = array('rock', 'paper', 'scissors');
-  $resultMsg = 'Please select a strategy and press Play';
+  $resultMessage = 'Please select a strategy and press Play';
   if (isset($_POST['choose']))
   {
     $human = $_POST['choose'];
@@ -50,8 +50,8 @@
     {
       if ($human !== 'test')
       {
-        $machine = array_rand($names);
-        $resultMessage = 'Human='.$human.' Computer='.$machine.'Result='.checkdate($machine, $human);
+        $machine = $names[array_rand($names)];
+        $resultMessage = 'Human='.$human.' Computer='.$machine.' Result='.check($machine, $human);
       }
       else {
         $resultMessage = '';
@@ -61,7 +61,8 @@
           for($h=0;$h<3;$h++)
           {
             $hsel = $names[$h];
-            $resultMsg = $resultMsg."\n".check($c, $h);
+            $result = 'Human='.$hsel.' Computer='.$csel.' Result='.check($csel, $hsel);
+            $resultMessage = $resultMessage.'\n'.$result;
           }
         }
       }
@@ -91,7 +92,7 @@
           <input type="submit" value="Play"/>
           <input type="submit" name="logout" value= "Log Out"/>
         </p>
-        <p class="info"><?= $resultMsg ?></p>
+        <p class="info"><?= $resultMessage ?></p>
       </form>
     </body>
 </html>
