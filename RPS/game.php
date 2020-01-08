@@ -51,20 +51,21 @@
       if ($human !== 'test')
       {
         $machine = $names[array_rand($names)];
-        $resultMessage = 'Human='.$human.' Computer='.$machine.' Result='.check($machine, $human);
+        $resultMessage = '<table><tr><td>Human='.$human.'</td><td>Computer='.$machine.'</td><td>Result='.check($machine, $human).'</td></tr></table>';
       }
       else {
-        $resultMessage = '';
+        $resultMessage = '<table>';
         for($c=0;$c<3;$c++)
         {
           $csel = $names[$c];
           for($h=0;$h<3;$h++)
           {
             $hsel = $names[$h];
-            $result = 'Human='.$hsel.' Computer='.$csel.' Result='.check($csel, $hsel);
-            $resultMessage = $resultMessage.'<BR>'.$result;
+            $result = '<tr><td>Human='.$hsel.'</td><td>Computer='.$csel.'</td><td>Result='.check($csel, $hsel).'</td>';
+            $resultMessage = $resultMessage.$result;
           }
         }
+        $resultMessage = $resultMessage.'</table>';
       }
     }
   }
@@ -77,6 +78,7 @@
     </head>
     <style>
       p.info = { padding: 10; background: grey; }
+      td { padding-right: 10px; }
     </style>
     <body>
       <h1>Rock Paper Scissors</h1>
@@ -87,7 +89,7 @@
             <option value="rock">Rock</option>
             <option value="paper">Paper</option>
             <option value="scissors">Scissors</option>
-            <option value="test">Test</option>
+            <option value="test" selected>Test</option>
           </select>
           <input type="submit" value="Play"/>
           <input type="submit" name="logout" value= "Log Out"/>
