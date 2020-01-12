@@ -37,10 +37,14 @@
 
     if ($md5 === $stored_hash)
     {
+      error_log("Login success ".$_POST['who']);
       header("Location: autos.php?name=".urlencode($_POST['who']));
     }
     else
+    {
       $pwderror = "Wrong password";
+      error_log("Login fail ".$_POST['who']." $md5");
+    }
   }
 ?>
 
