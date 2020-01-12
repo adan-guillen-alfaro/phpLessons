@@ -17,11 +17,15 @@
       $usererror = 'E-mail and password are required';
     else {
       if (!filter_var($user, FILTER_VALIDATE_EMAIL))
-        $usererror = 'Invalid e-mail'
+        $usererror = 'Invalid e-mail';
     }
 
     if ($pwd === '')
       $pwderror = 'Incorrect password';
+  }
+  else {
+    $user='';
+    $pwd='';
   }
 
   if (strlen($user) > 0 && strlen($pwd) > 0 && $pwderror === '*')
@@ -38,15 +42,15 @@
     else
       $pwderror = "Wrong password";
   }
-
 ?>
+
 <html>
     <head>
         <meta charset="utf-8" />
         <title>Adan test db</title>
         <style>
           .error { color:red; }
-
+        </style>
     </head>
     <body>
         <form name="login" method="POST">
