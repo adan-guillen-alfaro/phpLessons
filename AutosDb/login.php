@@ -58,20 +58,20 @@
     </head>
     <body>
         <form name="login" method="POST">
-          <p>
-          <label for="who">e-mail: </label>
-          <input type="text" name="who" id="who" value = "<?= htmlentities($user) ?>"/>
-          <span class="error" id="userError" /><?= htmlentities($usererror) ?></span>
-          </p>
-          <p>
-          <label for="pwd">Password: </label>
-          <input type="password" name="pass" id="pwd"/>
-          <span class="error" id="pwdError" /><?= htmlentities($pwderror) ?></span>
-          </p>
-          <p>
-          <input type="submit" value="Log In"/>
-          <input type="submit" name="cancel" value="Cancel"/>
-          </p>
+          <table>
+            <tr>
+          <td><label for="who">e-mail: </label></td>
+          <td><input type="text" name="who" id="who" value = "<?= htmlentities($user) ?>"/></td>
+          <td><span class="error" id="userError" /><?= htmlentities($usererror) ?></span></td>
+        </tr><tr>
+          <td><label for="pwd">Password: </label>
+          <td><input type="password" name="pass" id="pwd"/>
+          <td><span class="error" id="pwdError" /><?= htmlentities($pwderror) ?></span></td>
+        </tr><tr>
+          <td><input type="submit" value="Log In"/></td>
+          <td><input type="submit" name="cancel" value="Cancel"/></td>
+        </tr>
+        </table>
         </form>
     </body>
 </html>
