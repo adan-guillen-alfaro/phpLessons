@@ -31,10 +31,9 @@
 
     $md5 = hash('md5', $salt.$pwd);
 
-    //echo "<BR>stored_hash: ".$stored_hash." md5: ".$md5;
     if ($md5 === $stored_hash)
     {
-      header("Location: autos.php");
+      header("Location: autos.php?name=".urlencode($_POST['who']));
     }
     else
       $pwderror = "Wrong password";
