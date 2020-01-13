@@ -17,25 +17,34 @@
   {
     if (strlen($_POST['make']) > 0 && strlen($_POST['mileage']) > 0 && strlen($_POST['year']) > 0)
     {
-      if (!is_numberic($_POST['mileage']))
+      if (!is_numeric($_POST['mileage']))
         $errormessage = 'Incorrect mileage value';
       else
       {
-        if (!is_numberic($_POST['year']))
+        if (!is_numeric($_POST['year']))
           $errormessage = 'Incorrect year value';
         else
         {
-          $pdo->prepare("INSERT INTO autosdb (make, year, mileage) VALUES (:make, :year, :mileage)");
-          $pdo->execute(array(
-            ':make' => $_POST['make'],
-            ':year' => $_POST['year'],
-            ':mileage' => $_POST['mileage'],
-          ));
+          if (!is_null($pdo))
+          {
+            try
+            {
+              $pdo->prepare("INSERT INTO autosdb (make, year, mileage) VALUES (:make, :year, :mileage)");
+              $pdo->execute(array(
+                ':make' => $_POST['make'],
+                ':year' => $_POST['year'],
+                ':mileage' => $_POST['mileage'],
+              ));
+            }
+            catch (Exception $e)
+            {
+            }
+          }
         }
       }
     }
     else
-      $errormessage = 'All parameters must be set.'
+      $errormessage = 'All parameters must be set.';
   }
 ?>
 
@@ -54,30 +63,39 @@
         <table>
           <tr>
         <td><label for="make">Make</label></td>
-        <td><input type="text" name="make" value="<?= echo($_POST['make']);?>"/></td>
+        <td><input type="text" name="make" value="<?php isset($_POST['make']) ? htmlentities($_POST['make']) : "";?>"/></td>
       </tr><tr>
         <td><label for="mileage">Mileage</label></td>
-        <td><input type="text" name="mileage" value="<?= echo($_POST['mileage']);?>"/></td>
+        <td><input type="text" name="mileage" value="<?php isset($_POST['mileage']) ? htmlentities($_POST['mileage']) : "";?>"/></td>
       </tr><tr>
         <td><label for="year">Year</label></td>
-        <td><input type="text" name="year" value="<?= echo($_POST['year']);?>"/></td>
+        <td><input type="text" name="year" value="<?php isset($_POST['year']) ? htmlentities($_POST['year']) : "";?>"/></td>
       </tr><tr>
         <td><input type="submit" value="Add" /></td>
         <td><input type="submit" name="LogOut" value="Log Out" /></td>
       </tr></table>
       </form>
-      <p class="error"><?= echo($errormessage); ?></p>
+      <p class="error"><?= htmlentities($errormessage) ?></p>
       <br/>
       <?php
-        echo '<table><tr><th>Make</th><th>Mileage</th><th>Year</th></tr>';
-          $res = $pdo->query("SELECT * FROM autosdb");
-          while ($row = $res->fetch(PDO::FETCH_ASSOC))
+        if (!is_null($pdo))
+        {
+          try
           {
-              echo '<tr>';
-              echo '<td>'.$row['make'].'</td><td>'.$row['mileage'].'</td><td>'.$row['year'].'</td>';
-              echo '</tr>';
+            echo '<table><tr><th>Make</th><th>Mileage</th><th>Year</th></tr>';
+              $res = $pdo->query("SELECT * FROM autosdb");
+              while ($row = $res->fetch(PDO::FETCH_ASSOC))
+              {
+                  echo '<tr>';
+                  echo '<td>'.$row['make'].'</td><td>'.$row['mileage'].'</td><td>'.$row['year'].'</td>';
+                  echo '</tr>';
+              }
+            echo '</table>';
+          } catch (Exception $exc)
+          {
+
           }
-        echo '</table>';
+        }
       ?>
     </body>
 </html>
