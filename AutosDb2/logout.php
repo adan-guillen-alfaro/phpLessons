@@ -1,5 +1,5 @@
 <?php
-  start_session();
+  session_start();
   session_destroy();
   header("Location: view.php");
  ?>

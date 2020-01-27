@@ -1,5 +1,5 @@
 <?php
-  start_session();
+  session_start();
  ?>
  <html>
      <head>
@@ -9,11 +9,11 @@
            .error { color:red; }
          </style>
      </head>
-     <body>
+     <body style="font-family: sans-serif;">
        <?php
          if (!isset($_SESSION['name']))
          {
-           echo('<p href="login.php">Please Log In</a>');
+           echo('<p>Please <a href="login.php">Log In</a></p>');
          }
         ?>
      </body>
