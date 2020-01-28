@@ -1,44 +1,40 @@
 <?php
+  session_start();
   if (isset($_POST['cancel']))
   {
     header("Location: index.php");
     return;
   }
-
-  session_start();
-
   if (isset($_POST["name"]) && isset($_POST["pwd"]))
   {
-    //$user = $_POST["email"];
-    //$pwd = $_POST["pwd"];
-
+    unset($_SESSION["name"]);
     if (strlen($_POST["name"]) > 0 && strlen($_POST["pwd"]) > 0)
     {
         $salt = 'XyZzy12*_';
         $stored_hash = '1a52e17fa899cf40fb04cfc42e6352f1'; // hash for a pwd = 'php123'
-
         $md5 = hash('md5', $salt.$_POST["pwd"]);
-
-        //echo "<BR>stored_hash: ".$stored_hash." md5: ".$md5;
         if ($md5 === $stored_hash)
         {
           $_SESSION["name"] = $_POST["name"];
+          unset($_SESSION["error"]);
           header('Location: view.php');
+          return;
         }
         else
         {
-          $_SESSION["error"] = "Wrong password. Please Log In.";
-          header('Location: login.php');
+          $_SESSION["error"] = "Incorrect password.";
+          header( 'Location: login.php' ) ;
+          return;
         }
     }
     else
     {
-      $_SESSION["error"] = "Please Log In.";
-      header('Location: login.php');
+      $_SESSION["error"] = "Incorrect password.";
+      header( 'Location: login.php' ) ;
+      return;
     }
   }
- ?>
-
+?>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -56,7 +52,7 @@
           unset($_SESSION["error"]);
         }
        ?>
-        <form name="login" method="POST">
+        <form method="POST">
           <table>
           <tr>
             <td><label for="name">e-mail: </label></td>

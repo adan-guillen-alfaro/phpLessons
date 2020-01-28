@@ -15,6 +15,11 @@
          {
            echo('<p>Please <a href="login.php">Log In</a></p>');
          }
+         else
+         {
+           echo('<p>Hello '.$_SESSION['name'].'.</p>');
+           echo('<p>Click here to <a href="logout.php">Log Out</a></p>');
+         }
         ?>
      </body>
  </html>
