@@ -67,7 +67,7 @@
           <table>
           <tr>
             <td><label for="name">e-mail: </label></td>
-            <td><input type="text" name="name" id="name" value="<?= isset($_SESSION['lastname']) ? $_SESSION['lastname'] : ''; ?>" /></td>
+            <td><input type="text" name="name" id="name" value="<?= isset($_SESSION['lastname']) ? htmlentities($_SESSION['lastname']) : ''; ?>" /></td>
           </tr>
           <tr>
             <td><label for="pwd">Password: </label></td>
