@@ -56,7 +56,8 @@
       }
       else
       {
-        $_SESSION["new_pwd"] = $_POST["new_pwd"];
+        $salt = 'XyZzy12*_';
+        $_SESSION["new_pwd"] = hash('md5', $salt.$_POST["new_pwd"]);
 
         unset($_SESSION["error"]);
         header("Location: register.php");

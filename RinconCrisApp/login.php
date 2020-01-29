@@ -38,8 +38,13 @@
 
   function checkUser($user, $pwd)
   {
-    //TODO
+    $salt = 'XyZzy12*_';
+    $pwdhash =  hash('md5', $salt.$pwd);
+
+    //TODO: Comprobar si el usuario existe y el pass es correcto
+
     $_SESSION["activeUser"] = $user;
+    return true;
   }
 
  ?>
@@ -50,8 +55,8 @@
        <link rel="stylesheet" href="styles_erc.css">
    </head>
    <body>
-    <p class="headers">Bienvenida/o a El rincón de Cris.</p>
-    <p class="headers">Por favor introduce tus datos para continuar.</p>
+    <p class="headers">Bienvenida/o a El rincón de Cris.<br>Por favor introduce tus datos para continuar.</p>
+    <!-- <p class="headers">Por favor introduce tus datos para continuar.</p> -->
     <?php
       if (isset($_SESSION["error"]))
       {

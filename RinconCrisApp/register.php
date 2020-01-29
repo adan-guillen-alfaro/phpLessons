@@ -1,12 +1,6 @@
 <?php
   session_start();
 
-  function registerUser($name, $lastname, $mail, $pwd, $direction, $cp, $city, $country, $tlf)
-  {
-    //TODO
-    $regStatus = "OK";
-  }
-
   $regStatus = "";
   $name = "";
 
@@ -14,8 +8,8 @@
   {
     if (strlen($_SESSION["new_name"]) > 0 && strlen($_SESSION["new_lastname"]) > 0 && strlen($_SESSION["new_email"]) > 0 && strlen($_SESSION["new_pwd"]) > 0)
     {
-      //TODO: Registrar
-      registerUser($_SESSION["new_name"], $_SESSION["new_lastname"], $_SESSION["new_email"], $_SESSION["new_pwd"], $_SESSION["new_direction"], $_SESSION["new_cp"], $_SESSION["new_city"], $_SESSION["new_country"], $_SESSION["new_tlf"]);
+      $regStatus = registerUser($_SESSION["new_name"], $_SESSION["new_lastname"], $_SESSION["new_email"], $_SESSION["new_pwd"], $_SESSION["new_direction"], $_SESSION["new_cp"], $_SESSION["new_city"], $_SESSION["new_country"], $_SESSION["new_tlf"]);
+      echo($regStatus.'<br>');
       if ($regStatus === "OK")
       {
         $name = $_SESSION["new_name"];
@@ -25,6 +19,12 @@
       $regStatus = "No se ha podido completar el registro.";
   }
   session_destroy();
+
+  function registerUser($name, $lastname, $mail, $pwd, $direction, $cp, $city, $country, $tlf)
+  {
+    //TODO: Registrar
+    return "OK";
+  }
 ?>
 <html>
   <head>
@@ -36,7 +36,7 @@
     <?php
       if (strlen($regStatus) > 0) {
         if ($regStatus === "OK") {
-          echo ('<p class="headers">Registro completado satisfactoriamente. Bienvenida/o a nuestro centro, '.htmlentities($name).'.</p>');
+          echo ('<p class="headers">Registro completado satisfactoriamente.<br>Bienvenida/o a nuestro centro, '.htmlentities($name).'.</p>');
         }
       }
       else {
