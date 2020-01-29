@@ -3,7 +3,7 @@
 
   if (isset($_POST['register']))
   {
-    header("Location: register.php");
+    header("Location: registerform.php");
     return;
   }
 
@@ -49,7 +49,7 @@
        <title>El rincón de Cris</title>
        <link rel="stylesheet" href="styles_erc.css">
    </head>
-   <body style="font-family: sans-serif;">
+   <body>
     <p class="headers">Bienvenida/o a El rincón de Cris.</p>
     <p class="headers">Por favor introduce tus datos para continuar.</p>
     <?php
