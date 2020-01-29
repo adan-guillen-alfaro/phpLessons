@@ -1,0 +1,24 @@
+p.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:red;
+}
+p.mandatory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:red;
+}
+div.table
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+p.headers
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
