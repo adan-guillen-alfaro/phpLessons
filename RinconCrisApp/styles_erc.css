@@ -59,7 +59,7 @@ a.schedule_button_off {
 #schedule table
 {
   border-collapse: collapse;
-  width: 80%;
+  width: 100%;
 }
 #schedule td, #schedule th {
   border: 1px solid #ddd;
