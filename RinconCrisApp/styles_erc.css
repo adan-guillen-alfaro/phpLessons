@@ -19,9 +19,69 @@ div.table
   justify-content: center;
   align-items: center;
 }
+div.schedule
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 p.headers
 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+a.schedule_button
+{
+      display: block;
+      width: 110px;
+      height: 29px;
+      background: #4CAF50;
+      padding: 2px;
+      text-align: center;
+      border-radius: 5px;
+      color: white;
+}
+a.schedule_button_off {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  display: block;
+  width: 110px;
+  height: 29px;
+  background: gray;
+  padding: 2px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+}
+#schedule table
+{
+  border-collapse: collapse;
+  width: 80%;
+}
+#schedule td, #schedule th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#schedule td:first-child { text-align: left; }
+#schedule tr:nth-child(even){background-color: #f2f2f2;}
+#schedule tr:hover {background-color: #ddd;}
+#schedule th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr.assisting_row
+{
+  color: green;
+}
+tr.no_assisting_row
+{
 }
