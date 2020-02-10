@@ -16,15 +16,21 @@ p.mandatory {
 }
 div.login_table
 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-div.schedule
-{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 2em;
   margin: auto;
   width: 70%;
 }
+div.schedule
+{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  margin: auto;
+  width: 70%;
+  padding: 2em;
+}
+
 p.headers
 {
   display: flex;
@@ -32,7 +38,6 @@ p.headers
   align-items: center;
 }
 
-// Week schedule table
 #schedule table
 {
   border-collapse: collapse;
@@ -49,7 +54,7 @@ td, th
 }
 
 #schedule td:first-child { text-align: left; }
-#schedule tr:nth-child(even){background-color: #f2f2f2;}
+#schedule tr:nth-child(even){background-color: #CDE9CE;}
 #schedule tr:hover {background-color: #ddd;}
 #schedule th {
   padding-top: 12px;
@@ -59,17 +64,15 @@ td, th
   color: white;
 }
 
-// Chose text color if user has signed into a class
 tr.assisting_row
 {
   color: green;
 }
-// Chose text color if user has signed into a class
+
 tr.no_assisting_row
 {
 }
 
-// Buttons to sign into a class or be removed from it
 a.schedule_button:link, a.schedule_button:visited {
   background-color: #f44336;
   color: white;
@@ -83,7 +86,6 @@ a.schedule_button:hover, a.schedule_button:active {
   background-color: red;
 }
 
-// Form inputs
 input[type=text], select {
   width: 100%;
   padding: 0.5em 0.5em;
@@ -93,7 +95,7 @@ input[type=text], select {
   box-sizing: border-box;
 }
 
-input[type=password], select {
+input[type=password] {
   width: 100%;
   padding: 0.5em 0.5em;
   display: inline-block;

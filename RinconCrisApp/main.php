@@ -61,8 +61,8 @@
         $schedule = getSchedule(date("d/m/Y"));
 
         echo('<div class="schedule">');
-        echo('<p>Welcome '.htmlentities($_SESSION["activeUser"]).'.</p>');
-        echo('<table width="100%" id="schedule">');
+        echo('<p>Welcome '.htmlentities($_SESSION["activeUser"]).'.</p></div>');
+        echo('<div class="schedule"><table width="100%" id="schedule">');
         echo('<tr><th>Clase</th><th>Hora</th><th>Aforo</th><th></th>');
         foreach ($schedule as $class)
         {

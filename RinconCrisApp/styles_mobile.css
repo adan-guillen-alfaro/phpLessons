@@ -16,16 +16,19 @@ p.mandatory {
 }
 div.login_table
 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 2em;
+  margin: auto;
+  width: 99%;
 }
 div.schedule
 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  margin: auto;
+  width: 99%;
+  padding: 2em;
 }
 p.headers
 {
@@ -34,11 +37,11 @@ p.headers
   align-items: center;
 }
 
-// Week schedule table
 #schedule table
 {
   border-collapse: collapse;
 }
+
 td, th
 {
   padding: 8px;
@@ -52,7 +55,7 @@ td, th
 }
 
 #schedule td:first-child { text-align: left; }
-#schedule tr:nth-child(even){background-color: #f2f2f2;}
+#schedule tr:nth-child(even){background-color: #CDE9CE;}
 #schedule tr:hover {background-color: #ddd;}
 #schedule th {
   padding-top: 12px;
@@ -62,17 +65,15 @@ td, th
   color: white;
 }
 
-// Chose text color if user has signed into a class
 tr.assisting_row
 {
   color: green;
 }
-// Chose text color if user has signed into a class
+
 tr.no_assisting_row
 {
 }
 
-// Buttons to sign into a class or be removed from it
 a.schedule_button:link, a.schedule_button:visited {
   background-color: #f44336;
   color: white;
@@ -87,7 +88,6 @@ a.schedule_button:hover, a.schedule_button:active {
 }
 
 
-// Form inputs
 input[type=text], select {
   width: 100%;
   padding: 0.5em 0.5em;

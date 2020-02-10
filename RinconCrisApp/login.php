@@ -71,8 +71,8 @@
       }
     ?>
     <div class="login_table">
+      <table width="75%">
         <form method="POST">
-         <table width="100%">
            <tr>
              <td><p>Usuario:</p></td>
              <td><input type="text" name="user" id="user" value="<?= isset($_SESSION["lastuser"]) ? htmlentities($_SESSION["lastuser"]) : ''; ?>" /></td>
@@ -85,8 +85,8 @@
              <td></td>
              <td align="right"><input type="submit" value="LogIn" /><input type="submit" value="Register" name="register" /></td>
            </tr>
-         </table>
         </form>
+      </table>
     </div>
    </body>
 </html>
