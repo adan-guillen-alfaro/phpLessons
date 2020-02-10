@@ -58,6 +58,7 @@ td, th
 #schedule td, #schedule th {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: center;
 }
 
 #schedule td:first-child { text-align: left; }

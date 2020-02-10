@@ -1,4 +1,6 @@
 <?php
+  require_once 'isMobile.php';
+
   session_start();
 
   if (!isset($_SESSION["activeUser"]))
@@ -51,13 +53,18 @@
    <head>
        <meta charset="utf-8" />
        <title>El rincón de Cris</title>
-       <link rel="stylesheet" href="styles_erc.css">
+       <?php
+        if (isMobile())
+          echo('<link rel="stylesheet" href="styles_mobile.css">');
+        else
+          echo('<link rel="stylesheet" href="styles_pc.css">');
+       ?>
    </head>
    <body>
      <?php
         $schedule = getSchedule(date("d/m/Y"));
 
-        echo('<div class="schedule"><table width="98%" id="schedule">');
+        echo('<div class="schedule"><table width="100%" id="schedule">');
         echo('<tr><th>Clase</th><th>Hora</th><th>Aforo</th><th></th>');
         foreach ($schedule as $class)
         {

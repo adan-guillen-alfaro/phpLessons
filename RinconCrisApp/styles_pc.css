@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 100%;
+}
+p.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:red;
+}
+p.mandatory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:red;
+}
+div.login_table
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.schedule
+{
+  margin: auto;
+  width: 70%;
+}
+p.headers
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+a.schedule_button:link, a.schedule_button:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 0.5em 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0.5em;
+}
+a.schedule_button:hover, a.schedule_button:active {
+  background-color: red;
+}
+#schedule table
+{
+  border-collapse: collapse;
+}
+td, th
+{
+  padding: 8px;
+  text-align: center;
+  font-size: 1em;
+}
+#schedule td, #schedule th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#schedule td:first-child { text-align: left; }
+#schedule tr:nth-child(even){background-color: #f2f2f2;}
+#schedule tr:hover {background-color: #ddd;}
+#schedule th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr.assisting_row
+{
+  color: green;
+}
+tr.no_assisting_row
+{
+}

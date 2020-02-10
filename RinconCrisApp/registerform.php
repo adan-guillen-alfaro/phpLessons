@@ -1,4 +1,5 @@
 <?php
+  require_once 'isMobile.php';
   session_start();
 
   if (isset($_POST['cancel']))
@@ -76,7 +77,12 @@
   <head>
       <meta charset="utf-8" />
       <title>El rincón de Cris - Registro</title>
-      <link rel="stylesheet" href="styles_erc.css">
+      <?php
+       if (isMobile())
+         echo('<link rel="stylesheet" href="styles_mobile.css">');
+       else
+         echo('<link rel="stylesheet" href="styles_pc.css">');
+      ?>
   </head>
   <body>
     <p class="headers">Por favor introduce tus datos para registrarte</p>

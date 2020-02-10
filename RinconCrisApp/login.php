@@ -1,4 +1,5 @@
 <?php
+  require_once 'isMobile.php';
   session_start();
 
   if (isset($_POST['register']))
@@ -52,7 +53,12 @@
    <head>
        <meta charset="utf-8" />
        <title>El rincón de Cris</title>
-       <link rel="stylesheet" href="styles_erc.css">
+       <?php
+        if (isMobile())
+          echo('<link rel="stylesheet" href="styles_mobile.css">');
+        else
+          echo('<link rel="stylesheet" href="styles_pc.css">');
+       ?>
    </head>
    <body>
     <p class="headers">Bienvenida/o a El rincón de Cris.<br>Por favor introduce tus datos para continuar.</p>
@@ -66,7 +72,7 @@
     ?>
     <div class="login_table">
         <form method="POST">
-         <table id="login_table">
+         <table width="100%">
            <tr>
              <td><p>Usuario:</p></td>
              <td><input type="text" name="user" id="user" value="<?= isset($_SESSION["lastuser"]) ? htmlentities($_SESSION["lastuser"]) : ''; ?>" /></td>
