@@ -8,10 +8,6 @@
     header("Location: login.php");
     return;
   }
-  else
-  {
-    echo('<p>Welcome '.htmlentities($_SESSION["activeUser"]).'.</p>');
-  }
 
   function getSchedule($date)
   {
@@ -64,7 +60,9 @@
      <?php
         $schedule = getSchedule(date("d/m/Y"));
 
-        echo('<div class="schedule"><table width="100%" id="schedule">');
+        echo('<div class="schedule">');
+        echo('<p>Welcome '.htmlentities($_SESSION["activeUser"]).'.</p>');
+        echo('<table width="100%" id="schedule">');
         echo('<tr><th>Clase</th><th>Hora</th><th>Aforo</th><th></th>');
         foreach ($schedule as $class)
         {
@@ -78,7 +76,7 @@
           echo('<td>'.$class['hour'].'</td>');
           echo('<td>'.$apuntadas.'/'.$maximo.'</td>');
           if ($assistance)
-            echo('<td><a class="schedule_button" href="addtoclass.php">Borrarse</a></td>');
+            echo('<td><a class="schedule_button" href="removefromclass.php">Borrarse</a></td>');
           else if ($apuntadas < $maximo)
             echo('<td><a class="schedule_button" href="addtoclass.php">Unirse</a></td>');
           echo('</tr>');

@@ -93,7 +93,7 @@
         unset($_SESSION["error"]);
       }
     ?>
-    <div class="table">
+    <div class="login_table">
         <form method="POST">
          <table>
            <tr>

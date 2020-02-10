@@ -31,18 +31,8 @@ p.headers
   justify-content: center;
   align-items: center;
 }
-a.schedule_button:link, a.schedule_button:visited {
-  background-color: #f44336;
-  color: white;
-  padding: 0.5em 0.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 0.5em;
-}
-a.schedule_button:hover, a.schedule_button:active {
-  background-color: red;
-}
+
+// Week schedule table
 #schedule table
 {
   border-collapse: collapse;
@@ -69,10 +59,56 @@ td, th
   color: white;
 }
 
+// Chose text color if user has signed into a class
 tr.assisting_row
 {
   color: green;
 }
+// Chose text color if user has signed into a class
 tr.no_assisting_row
 {
+}
+
+// Buttons to sign into a class or be removed from it
+a.schedule_button:link, a.schedule_button:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 0.5em 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0.5em;
+}
+a.schedule_button:hover, a.schedule_button:active {
+  background-color: red;
+}
+
+// Form inputs
+input[type=text], select {
+  width: 100%;
+  padding: 0.5em 0.5em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=password], select {
+  width: 100%;
+  padding: 0.5em 0.5em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 0.5em 0.5em;
+  margin: 2px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
