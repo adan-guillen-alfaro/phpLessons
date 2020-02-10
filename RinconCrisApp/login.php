@@ -64,9 +64,9 @@
         unset($_SESSION["error"]);
       }
     ?>
-    <div class="table">
+    <div class="login_table">
         <form method="POST">
-         <table>
+         <table id="login_table">
            <tr>
              <td><p>Usuario:</p></td>
              <td><input type="text" name="user" id="user" value="<?= isset($_SESSION["lastuser"]) ? htmlentities($_SESSION["lastuser"]) : ''; ?>" /></td>

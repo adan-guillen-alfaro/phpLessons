@@ -57,7 +57,7 @@
      <?php
         $schedule = getSchedule(date("d/m/Y"));
 
-        echo('<div class="schedule"><table width="75%" id="schedule">');
+        echo('<div class="schedule"><table width="98%" id="schedule">');
         echo('<tr><th>Clase</th><th>Hora</th><th>Aforo</th><th></th>');
         foreach ($schedule as $class)
         {
@@ -74,8 +74,6 @@
             echo('<td><a class="schedule_button" href="addtoclass.php">Borrarse</a></td>');
           else if ($apuntadas < $maximo)
             echo('<td><a class="schedule_button" href="addtoclass.php">Unirse</a></td>');
-          else
-              echo('<td><a class="schedule_button_off" href="addtoclass.php">Unirse</a></td>');
           echo('</tr>');
         }
         echo('</table></div>');
