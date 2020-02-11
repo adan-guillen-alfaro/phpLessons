@@ -46,9 +46,9 @@
   }
  ?>
  <html>
-   <head>
-       <meta charset="utf-8" />
-       <title>El rinc√≥n de Cris</title>
+   <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+       
+       <title>El rinc®Æn de Cris</title>
        <?php
         if (isMobile())
           echo('<link rel="stylesheet" href="styles_mobile.css">');
@@ -61,9 +61,8 @@
         $schedule = getSchedule(date("d/m/Y"));
 
         echo('<div class="schedule">');
-        echo('<p>Welcome '.htmlentities($_SESSION["activeUser"]).'.</p></div>');
-        echo('<div class="schedule"><table width="100%" id="schedule">');
-        echo('<tr><th>Clase</th><th>Hora</th><th>Aforo</th><th></th>');
+        echo('<p id="welcome">Welcome '.htmlentities($_SESSION["activeUser"]).'.</p>');
+        echo('<table width="100%" id="schedule"><tr><th>Clase</th><th>Hora</th><th>Aforo</th><th></th>');
         foreach ($schedule as $class)
         {
           $apuntadas = $class['apuntadas'];
