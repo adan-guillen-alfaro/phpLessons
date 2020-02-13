@@ -10,7 +10,7 @@
     return;
   }
 
-  function getWeekSchedule()
+  function getWeekDays()
   {
     $curDay = date('N') - 1;
 
@@ -23,7 +23,7 @@
     return $schedule;
   }
 
-  function getSchedule($date)
+  function getDaySchedule($date)
   {
     //TODO: Select classes in database
 
@@ -33,13 +33,16 @@
                       , "hour" => date("9:00")
                       , "apuntadas" => 2
                       , "maximo" => 3
+                      , "classId" => 1
                       , "assistance" => false);
+
     array_push($schedule, $class);
 
     $class = array("title" => "Pilates Studio"
                       , "hour" => date("10:00")
                       , "apuntadas" => 3
                       , "maximo" => 3
+                      , "classId" => 2
                       , "assistance" => false);
     array_push($schedule, $class);
 
@@ -47,6 +50,7 @@
                       , "hour" => date("11:00")
                       , "apuntadas" => 3
                       , "maximo" => 10
+                      , "classId" => 3
                       , "assistance" => true);
     array_push($schedule, $class);
 
@@ -54,6 +58,7 @@
                       , "hour" => date("12:00")
                       , "apuntadas" => 2
                       , "maximo" => 3
+                      , "classId" => 4
                       , "assistance" => false);
     array_push($schedule, $class);
     return $schedule;
@@ -72,17 +77,17 @@
    </head>
    <body>
      <?php
-        $week = getWeekSchedule();
+        $week = getWeekDays();
         $firstItem = true;
 
         foreach ($week as $day)
         {
-          $schedule = getSchedule($day);
+          $schedule = getDaySchedule($day);
 
           echo('<div class="schedule">');
           if ($firstItem)
           {
-            echo('<p id="welcome">Bienvenida/o '.htmlentities($_SESSION["activeUser"]).'.</p>');
+            echo('<p id="welcome" class="headers">Bienvenida/o '.htmlentities($_SESSION["activeUser"]).'.</p>');
             $firstItem = false;
           }
 
@@ -99,9 +104,9 @@
             echo('<td>'.$class['hour'].'</td>');
             echo('<td>'.$apuntadas.'/'.$maximo.'</td>');
             if ($assistance)
-              echo('<td><a class="schedule_button" href="removefromclass.php">Borrarse</a></td>');
+              echo('<td><a class="schedule_button" href="removefromclass.php?classId='.$class['classId'].'">Borrarse</a></td>');
             else if ($apuntadas < $maximo)
-              echo('<td><a class="schedule_button" href="addtoclass.php">Unirse</a></td>');
+              echo('<td><a class="schedule_button" href="addtoclass.php?classId='.$class['classId'].'">Unirse</a></td>');
             echo('</tr>');
           }
           echo('</table></div>');

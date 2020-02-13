@@ -63,6 +63,7 @@
        ?>
    </head>
    <body>
+     <div class="login_table">
     <p class="headers">Bienvenida/o a El rincón de Cris.<br>Por favor introduce tus datos para continuar.</p>
     <!-- <p class="headers">Por favor introduce tus datos para continuar.</p> -->
     <?php
@@ -72,7 +73,7 @@
         unset($_SESSION["error"]);
       }
     ?>
-    <div class="login_table">
+    <!--<div class="login_table">-->
         <form method="POST">
           <div class="form_item">
             <label for="user">e-mail</label><span class="mandatory"> *</span>

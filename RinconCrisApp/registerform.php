@@ -85,15 +85,16 @@
       ?>
   </head>
   <body>
-    <p class="headers">Por favor introduce tus datos para registrarte</p>
-    <?php
-      if (isset($_SESSION["error"]))
-      {
-        echo('<p class="error">'.$_SESSION["error"].'</p>');
-        unset($_SESSION["error"]);
-      }
-    ?>
     <div class="register_form">
+      <p class="headers">Por favor introduce tus datos para registrarte</p>
+      <?php
+        if (isset($_SESSION["error"]))
+        {
+          echo('<p class="error">'.$_SESSION["error"].'</p>');
+          unset($_SESSION["error"]);
+        }
+      ?>
+
       <form method="post">
         <div class="form_item">
           <label for="new_email">e-mail</label><span class="mandatory"> *</span>
