@@ -1,7 +1,7 @@
 <?php
   require_once 'isMobile.php';
   require_once 'pdo.php';
-  
+
   session_start();
 
   if (isset($_POST['register']))
@@ -73,22 +73,19 @@
       }
     ?>
     <div class="login_table">
-      <table width="75%">
         <form method="POST">
-           <tr>
-             <td><p>Usuario:</p></td>
-             <td><input type="text" name="user" id="user" value="<?= isset($_SESSION["lastuser"]) ? htmlentities($_SESSION["lastuser"]) : ''; ?>" /></td>
-           </tr>
-           <tr>
-             <td><p>Password:</p></td>
-             <td><input type="password" name="pwd" id="pwd" /></td>
-           </tr>
-           <tr>
-             <td></td>
-             <td align="right"><input type="submit" value="LogIn" /><input type="submit" value="Register" name="register" /></td>
+          <div class="form_item">
+            <label for="user">e-mail</label><span class="mandatory"> *</span>
+            <input type="text" name="user" id="user" value="<?= isset($_SESSION["lastuser"]) ? htmlentities($_SESSION["lastuser"]) : ''; ?>" />
+          </div>
+          <div class="form_item">
+            <label for="pwd">Password</label><span class="mandatory"> *</span>
+            <input type="password" name="pwd" id="pwd" />
+          </div>
+             <input type="submit" value="LogIn" />
+             <input type="submit" value="Register" name="register" />
            </tr>
         </form>
-      </table>
     </div>
    </body>
 </html>
