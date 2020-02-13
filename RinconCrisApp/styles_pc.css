@@ -95,6 +95,7 @@ a.schedule_button:hover, a.schedule_button:active {
 
 input[type=text], select {
   width: 100%;
+  font-size: 1em;
   padding: 0.5em 0.5em;
   display: inline-block;
   border: 1px solid #ccc;
@@ -104,6 +105,7 @@ input[type=text], select {
 
 input[type=password] {
   width: 100%;
+  font-size: 1em;
   padding: 0.5em 0.5em;
   display: inline-block;
   border: 1px solid #ccc;
@@ -113,6 +115,7 @@ input[type=password] {
 
 input[type=submit] {
   width: 100%;
+  font-size: 1em;
   background-color: #4CAF50;
   color: white;
   padding: 0.5em 0.5em;
