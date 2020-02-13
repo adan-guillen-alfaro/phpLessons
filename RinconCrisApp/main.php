@@ -1,5 +1,6 @@
 <?php
   require_once 'isMobile.php';
+  require_once 'pdo.php';
 
   session_start();
 
@@ -84,7 +85,7 @@
             echo('<p id="welcome">Bienvenida/o '.htmlentities($_SESSION["activeUser"]).'.</p>');
             $firstItem = false;
           }
-          
+
           echo('<table width="100%" id="schedule"><tr><th>'.$day.'</th><th>Hora</th><th>Aforo</th><th></th>');
           foreach ($schedule as $class)
           {

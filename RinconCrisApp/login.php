@@ -1,5 +1,7 @@
 <?php
   require_once 'isMobile.php';
+  require_once 'pdo.php';
+  
   session_start();
 
   if (isset($_POST['register']))

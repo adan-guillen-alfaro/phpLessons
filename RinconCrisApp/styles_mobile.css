@@ -22,6 +22,14 @@ div.login_table
   margin: auto;
   width: 99%;
 }
+div.register_form
+{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 2em;
+  margin: auto;
+  width: 50%;
+}
 div.schedule
 {
   border-radius: 5px;

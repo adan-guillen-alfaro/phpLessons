@@ -1,5 +1,7 @@
 <?php
   require_once 'isMobile.php';
+  require_once 'pdo.php';
+
   session_start();
 
   $regStatus = "";
@@ -10,10 +12,23 @@
     if (strlen($_SESSION["new_name"]) > 0 && strlen($_SESSION["new_lastname"]) > 0 && strlen($_SESSION["new_email"]) > 0 && strlen($_SESSION["new_pwd"]) > 0)
     {
       $regStatus = registerUser($_SESSION["new_name"], $_SESSION["new_lastname"], $_SESSION["new_email"], $_SESSION["new_pwd"], $_SESSION["new_direction"], $_SESSION["new_cp"], $_SESSION["new_city"], $_SESSION["new_country"], $_SESSION["new_tlf"]);
-      echo($regStatus.'<br>');
       if ($regStatus === "OK")
       {
         $name = $_SESSION["new_name"];
+
+        unset($_SESSION["new_name"]);
+        unset($_SESSION["new_lastname"]);
+        unset($_SESSION["new_email"]);
+        unset($_SESSION["new_pwd"]);
+        unset($_SESSION["new_direction"]);
+        unset($_SESSION["new_cp"]);
+        unset($_SESSION["new_city"]);
+        unset($_SESSION["new_country"]);
+        unset($_SESSION["new_tlf"]);
+      }
+      else
+      {
+        $_SESSION["error"] = "No se ha podido registrar el nuevo usuario.";
       }
     }
     else

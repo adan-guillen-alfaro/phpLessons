@@ -93,60 +93,30 @@
         unset($_SESSION["error"]);
       }
     ?>
-    <div class="login_table">
-      <table width="100%">
-        <form method="POST">
-           <tr>
-             <td><p>Nombre:</p></td>
-             <td><input type="text" name="new_name" id="name" value="<?= isset($_SESSION["new_name"]) ? htmlentities($_SESSION["new_name"]) : ''; ?>" /></td>
-             <td><p class="mandatory">*</p></td>
-           </tr>
-           <tr>
-             <td><p>Apellidos:</p></td>
-             <td><input type="text" name="new_lastname" id="lastname" value="<?= isset($_SESSION["new_lastname"]) ? htmlentities($_SESSION["new_lastname"]) : ''; ?>" /></td>
-             <td><p class="mandatory">*</p></td>
-           </tr>
-           <tr>
-             <td><p>Dirección:</p></td>
-             <td><input type="text" name="new_direction" id="direction" value="<?= isset($_SESSION["new_direction"]) ? htmlentities($_SESSION["new_direction"]) : ''; ?>" /></td>
-           </tr>
-           <tr>
-             <td><p>CP:</p></td>
-             <td><input type="text" name="new_cp" id="cp" value="<?= isset($_SESSION["new_cp"]) ? htmlentities($_SESSION["new_cp"]) : ''; ?>" /></td>
-           </tr>
-           <tr>
-             <td><p>Ciudad:</p></td>
-             <td><input type="text" name="new_city" id="city" value="<?= isset($_SESSION["new_city"]) ? htmlentities($_SESSION["new_city"]) : ''; ?>" /></td>
-           </tr>
-           <tr>
-             <td><p>País:</p></td>
-             <td><input type="text" name="new_country" id="country" value="<?= isset($_SESSION["new_country"]) ? htmlentities($_SESSION["new_country"]) : ''; ?>" /></td>
-           </tr>
-           <tr>
-             <td><p>Teléfono:</p></td>
-             <td><input type="text" name="new_tlf" id="tlf" value="<?= isset($_SESSION["new_tlf"]) ? htmlentities($_SESSION["new_tlf"]) : ''; ?>" /></td>
-           </tr>
-           <tr>
-             <td><p>e-mail:</p></td>
-             <td><input type="text" name="new_email" id="email" value="<?= isset($_SESSION["new_email"]) ? htmlentities($_SESSION["new_email"]) : ''; ?>" /></td>
-             <td><p class="mandatory">*</p></td>
-           </tr>
-           <tr>
-             <td><p>Password:</p></td>
-             <td><input type="password" name="new_pwd" id="pwd" /></td>
-             <td><p class="mandatory">*</p></td>
-           </tr>
-           <tr>
-             <td><p>Verifique el password:</p></td>
-             <td><input type="password" name="new_pwd2" id="pwd2" /></td>
-             <td><p class="mandatory">*</p></td>
-           </tr>
-           <tr>
-             <td></td>
-             <td align="right"><input type="submit" value="Registarse" name="register" /><input type="submit" value="Cancelar" name="cancel" /></td>
-           </tr>
-        </form>
-      </table>
+    <div class="register_form">
+      <form method="post">
+        <label for="new_email">e-mail</label>
+        <input type="text" name="new_email" id="email" value="<?= isset($_SESSION["new_email"]) ? htmlentities($_SESSION["new_email"]) : ''; ?>" />
+        <label for="new_name">Nombre</label>
+        <input type="text" name="new_name" id="name" value="<?= isset($_SESSION["new_name"]) ? htmlentities($_SESSION["new_name"]) : ''; ?>" />
+        <label for="new_lastname">Apellidos</label>
+        <input type="text" name="new_lastname" id="lastname" value="<?= isset($_SESSION["new_lastname"]) ? htmlentities($_SESSION["new_lastname"]) : ''; ?>" />
+        <label for="new_direction">Dirección</label>
+        <input type="text" name="new_direction" id="direction" value="<?= isset($_SESSION["new_direction"]) ? htmlentities($_SESSION["new_direction"]) : ''; ?>" />
+        <label for="new_cp">C.P.</label>
+        <input type="text" name="new_cp" id="cp" value="<?= isset($_SESSION["new_cp"]) ? htmlentities($_SESSION["new_cp"]) : ''; ?>" />
+        <label for="new_city">Ciudad</label>
+        <input type="text" name="new_city" id="city" value="<?= isset($_SESSION["new_city"]) ? htmlentities($_SESSION["new_city"]) : ''; ?>" />
+        <label for="new_country">País</label>
+        <input type="text" name="new_country" id="country" value="<?= isset($_SESSION["new_country"]) ? htmlentities($_SESSION["new_country"]) : ''; ?>" />
+        <label for="new_tlf">Teléfono</label>
+        <input type="text" name="new_tlf" id="tlf" value="<?= isset($_SESSION["new_tlf"]) ? htmlentities($_SESSION["new_tlf"]) : ''; ?>" />
+        <label for="new_tlf">Password</label>
+        <input type="password" name="new_pwd" id="pwd" />
+        <label for="new_tlf">Repetir Password</label>
+        <input type="password" name="new_pwd2" id="pwd2" />
+        <input type="submit" value="Registarse" name="register" /><input type="submit" value="Cancelar" name="cancel" />
+      </form>
     </div>
 
   </body>
