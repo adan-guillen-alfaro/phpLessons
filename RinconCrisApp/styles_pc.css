@@ -11,19 +11,19 @@ body {
 }
 div.login_table
 {
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #f2f2f2;
   padding: 2em;
   margin: auto;
-  width: 70%;
+  width: 50vw;
 }
 div.register_form
 {
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #f2f2f2;
   padding: 2em;
   margin: auto;
-  width: 50%;
+  width: 50vw;
 }
 div.form_item
 {
@@ -32,10 +32,10 @@ div.form_item
 
 div.schedule
 {
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #f2f2f2;
   margin: auto;
-  width: 70%;
+  width: 70vw;
   padding: 2em;
 }
 
