@@ -1,10 +1,11 @@
 <?php
   require_once 'isMobile.php';
   require_once 'pdo.php';
-
+  require_once 'usrmgr.php';
+  
   session_start();
 
-  if (!isset($_GET['classId']) && !isset($_SESSION['activeUser']))
+  if (!isset($_GET['userId']) && !isset($_GET['classId']) && !isset($_SESSION['activeUser']))
   {
     $_SESSION['error'] = 'No se ha podido realizar la petición. Por favor vuelva a intentarlo.';
   }

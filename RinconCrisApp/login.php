@@ -1,6 +1,7 @@
 <?php
   require_once 'isMobile.php';
   require_once 'pdo.php';
+  require_once 'usrmgr.php';
 
   session_start();
 
@@ -38,18 +39,6 @@
       }
     }
   }
-
-  function checkUser($user, $pwd)
-  {
-    $salt = 'XyZzy12*_';
-    $pwdhash =  hash('md5', $salt.$pwd);
-
-    //TODO: Comprobar si el usuario existe y el pass es correcto
-
-    $_SESSION["activeUser"] = $user;
-    return true;
-  }
-
  ?>
  <html>
    <head>

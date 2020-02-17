@@ -1,14 +1,19 @@
 <?php
   require_once 'isMobile.php';
   require_once 'pdo.php';
+  require_once 'usrmgr.php';
 
   session_start();
+
+  $isAdminUser = false;
 
   if (!isset($_SESSION["activeUser"]))
   {
     header("Location: login.php");
     return;
   }
+
+  $isAdminUser = hasAdminRights($_SESSION["activeUser"]);
 
   function getWeekDays()
   {
@@ -103,11 +108,17 @@
             echo('<td>'.$class['title'].'</td>');
             echo('<td>'.$class['hour'].'</td>');
             echo('<td>'.$apuntadas.'/'.$maximo.'</td>');
+            echo('<td>');
             if ($assistance)
-              echo('<td><a class="schedule_button" href="removefromclass.php?classId='.$class['classId'].'">Borrarse</a></td>');
+              echo('<a class="schedule_button" href="removefromclass.php?classId='.$class['classId'].'&userId='.$_SESSION["activeUser"].'">Borrarse</a>');
             else if ($apuntadas < $maximo)
-              echo('<td><a class="schedule_button" href="addtoclass.php?classId='.$class['classId'].'">Unirse</a></td>');
-            echo('</tr>');
+              echo('<a class="schedule_button" href="addtoclass.php?classId='.$class['classId'].'&userId='.$_SESSION["activeUser"].'">Unirse</a>');
+
+            if ($isAdminUser)
+            {
+              echo(' <a class="schedule_button" href="editclass.php?classId='.$class['classId'].'">Editar</a>');
+            }
+            echo('</td></tr>');
           }
           echo('</table></div>');
         }

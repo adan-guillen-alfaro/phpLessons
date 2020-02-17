@@ -1,6 +1,7 @@
 <?php
   require_once 'isMobile.php';
   require_once 'pdo.php';
+  require_once 'usrmgr.php';
 
   session_start();
 
@@ -35,12 +36,6 @@
       $regStatus = "No se ha podido completar el registro.";
   }
   session_destroy();
-
-  function registerUser($name, $lastname, $mail, $pwd, $direction, $cp, $city, $country, $tlf)
-  {
-    //TODO: Registrar
-    return "OK";
-  }
 ?>
 <html>
   <head>

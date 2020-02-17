@@ -2,7 +2,7 @@
   require_once 'isMobile.php';
   require_once 'pdo.php';
   require_once 'usrmgr.php';
-  
+
   session_start();
 
   if (!isset($_GET['userId']) && !isset($_GET['classId']) && !isset($_SESSION['activeUser']))
@@ -35,10 +35,7 @@
         echo('<p class="headers">'.$_SESSION["error"].'</p>');
         unset($_SESSION["error"]);
       }
-      else
-      {
-        echo('<p class="headers">Se ha apuntado satisfactoriamente a la clase.</p>');
-      }
+
     ?>
     <p class="headers"><a href="main.php">Volver a la página principal</a></p>
     </div>
