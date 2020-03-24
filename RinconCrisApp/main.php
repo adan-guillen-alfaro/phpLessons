@@ -5,15 +5,15 @@
 
   session_start();
 
-  $isAdminUser = false;
-
   if (!isset($_SESSION["activeUser"]))
   {
     header("Location: login.php");
     return;
   }
 
-  $isAdminUser = hasAdminRights($_SESSION["activeUser"]);
+  $isAdminUser = false;
+  if (isset($_SESSION["activeUser"]))
+    $isAdminUser = hasAdminRights($pdo, $_SESSION["activeUser"]);
 
   function getWeekDays()
   {

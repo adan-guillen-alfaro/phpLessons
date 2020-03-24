@@ -1,14 +1,24 @@
 <?php
 
-function hasAdminRights($userId)
+function hasAdminRights($pdo, $userId)
 {
+  if ($pdo === null)
+    return false;
+
+  $sql = "SELECT admin FROM users WHERE eMail = :em";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(':em' => $userId));
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
   //TODO
+  print_r($row);
+
   return true;
 }
 
-function checkUser($user, $pwd)
+function checkUser($pdo, $user, $pwd)
 {
-  $salt = 'XyZzy12*_';
+  $salt = 'XzyYx14*_';
   $pwdhash =  hash('md5', $salt.$pwd);
 
   //TODO: Comprobar si el usuario existe y el pass es correcto
@@ -17,10 +27,26 @@ function checkUser($user, $pwd)
   return true;
 }
 
-function registerUser($name, $lastname, $mail, $pwd, $direction, $cp, $city, $country, $tlf)
+function registerUser($pdo, $name, $lastname, $mail, $pwd, $direction, $cp, $city, $country, $tlf)
 {
-  //TODO: Registrar
-  return true;
+  if ($pdo === null)
+    return false;
+
+  $salt = 'XzyYx14*_';
+  $pwdhash =  hash('md5', $salt.$pwd);
+
+  print_r($pwdhash);
+
+  $sql = "INSERT INTO users (name, lastName, eMail, pwdhash) VALUES (:name, :lastName, :eMail, :pwd)";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(':name' => $userId,
+                        ':lastName' => $lastname,
+                        ':eMail' => $mail,
+                        ':pwd' => $pwdhash
+  ));
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  print_r($row);
 }
 
 ?>
