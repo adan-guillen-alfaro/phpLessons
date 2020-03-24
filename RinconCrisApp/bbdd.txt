@@ -27,7 +27,7 @@ CREATE TABLE users (
     name VARCHAR(128),
     lastName VARCHAR(128),
     eMail VARCHAR(64),
-    CONSTRAINT FOREIGN KEY (tariff_id) REFERENCES tariffs (tarif_id),
+    CONSTRAINT FOREIGN KEY (tariff_id) REFERENCES tariffs (tariff_id),
     PRIMARY KEY (user_id)
     )
 
