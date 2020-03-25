@@ -27,22 +27,22 @@ function checkUser($pdo, $user, $pwd)
   return true;
 }
 
-function registerUser($pdo, $name, $lastname, $mail, $pwd, $direction, $cp, $city, $country, $tlf)
+function registerUser($pdo, $name, $lastname, $mail, $pwd_plain, $direction, $cp, $city, $country, $tlf)
 {
   if ($pdo === null)
     return false;
 
   $salt = 'XzyYx14*_';
-  $pwdhash =  hash('md5', $salt.$pwd);
+  $pwd =  hash('md5', $salt.$pwd_plain);
 
-  print_r($pwdhash);
+  print_r($pwd);
 
-  $sql = "INSERT INTO users (name, lastName, eMail, pwdhash) VALUES (:name, :lastName, :eMail, :pwd)";
+  $sql = "INSERT INTO users (name, lastName, eMail, pwd) VALUES (:name, :lastName, :eMail, :pwd)";
   $stmt = $pdo->prepare($sql);
-  $stmt->execute(array(':name' => $userId,
+  $stmt->execute(array(':name' => $name,
                         ':lastName' => $lastname,
                         ':eMail' => $mail,
-                        ':pwd' => $pwdhash
+                        ':pwd' => $pwd
   ));
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
