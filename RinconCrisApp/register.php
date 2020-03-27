@@ -12,25 +12,30 @@
   {
     if (strlen($_SESSION["new_name"]) > 0 && strlen($_SESSION["new_lastname"]) > 0 && strlen($_SESSION["new_email"]) > 0 && strlen($_SESSION["new_pwd"]) > 0)
     {
-      $regStatus = registerUser($pdo, $_SESSION["new_name"], $_SESSION["new_lastname"], $_SESSION["new_email"], $_SESSION["new_pwd"], $_SESSION["new_direction"], $_SESSION["new_cp"], $_SESSION["new_city"], $_SESSION["new_country"], $_SESSION["new_tlf"]);
-      if ($regStatus === "OK")
+      if (!existsUser($pdo, $_SESSION["new_email"]))
       {
-        $name = $_SESSION["new_name"];
+        $regStatus = registerUser($pdo, $_SESSION["new_name"], $_SESSION["new_lastname"], $_SESSION["new_email"], $_SESSION["new_pwd"], $_SESSION["new_direction"], $_SESSION["new_cp"], $_SESSION["new_city"], $_SESSION["new_country"], $_SESSION["new_tlf"]);
+        if ($regStatus === "OK")
+        {
+          $name = $_SESSION["new_name"];
 
-        unset($_SESSION["new_name"]);
-        unset($_SESSION["new_lastname"]);
-        unset($_SESSION["new_email"]);
-        unset($_SESSION["new_pwd"]);
-        unset($_SESSION["new_direction"]);
-        unset($_SESSION["new_cp"]);
-        unset($_SESSION["new_city"]);
-        unset($_SESSION["new_country"]);
-        unset($_SESSION["new_tlf"]);
+          unset($_SESSION["new_name"]);
+          unset($_SESSION["new_lastname"]);
+          unset($_SESSION["new_email"]);
+          unset($_SESSION["new_pwd"]);
+          unset($_SESSION["new_direction"]);
+          unset($_SESSION["new_cp"]);
+          unset($_SESSION["new_city"]);
+          unset($_SESSION["new_country"]);
+          unset($_SESSION["new_tlf"]);
+        }
+        else
+        {
+          $_SESSION["error"] = "No se ha podido registrar el nuevo usuario.";
+        }
       }
       else
-      {
-        $_SESSION["error"] = "No se ha podido registrar el nuevo usuario.";
-      }
+        $_SESSION["error"] = "Ya existe un usuario con la dirección de correo indicada.";
     }
     else
       $regStatus = "No se ha podido completar el registro.";

@@ -6,20 +6,21 @@ GRANT ALL ON studioApp.* TO 'admin'@'127.0.0.1' IDENTIFIED BY 'cr';
 
 USE studioApp;
 
-CREATE TABLE tariff_types (
-  type_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  name VARCHAR(128),
-  num_classes INT UNSIGNED,
-  period VARCHAR(32),
-  PRIMARY KEY (type_id)
+CREATE TABLE classes (
+  class_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  tittle VARCHAR(128),
+  day DATE,
+  hour TIME,
+  capacity INT UNSIGNED,
+  PRIMARY KEY (class_id)
 )
 
 CREATE TABLE tariffs (
   tariff_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(128),
   rate FLOAT,
-  type_id INT UNSIGNED,
-  CONSTRAINT FOREIGN KEY (type_id) REFERENCES tariff_types (type_id),
+  num_classes INT UNSIGNED,
+  period VARCHAR(32),
   PRIMARY KEY (tariff_id)
 )
 
@@ -34,19 +35,9 @@ CREATE TABLE users (
     PRIMARY KEY (user_id)
     )
 
-
-CREATE TABLE classes (
-  class_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  tittle VARCHAR(128),
-  day DATE,
-  hour TIME,
-  capacity INT UNSIGNED,
-  PRIMARY KEY (class_id)
-)
-
 CREATE TABLE userClassHistory (
   user_id INT UNSIGNED,
   class_id INT UNSIGNED,
   CONSTRAINT FOREIGN KEY (user_id) REFERENCES users (user_id),
-  CONSTRAINT FOREIGN KEY (class_id) REFERENCES classes (class_id),
+  CONSTRAINT FOREIGN KEY (class_id) REFERENCES classes (class_id)
 )
