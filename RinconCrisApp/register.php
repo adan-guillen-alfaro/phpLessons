@@ -17,6 +17,8 @@
         $regStatus = registerUser($pdo, $_SESSION["new_name"], $_SESSION["new_lastname"], $_SESSION["new_email"], $_SESSION["new_pwd"], $_SESSION["new_direction"], $_SESSION["new_cp"], $_SESSION["new_city"], $_SESSION["new_country"], $_SESSION["new_tlf"]);
         if ($regStatus === "OK")
         {
+          hasAdminRights($pdo, $_SESSION["new_email"]);
+          
           $name = $_SESSION["new_name"];
 
           unset($_SESSION["new_name"]);
@@ -30,15 +32,13 @@
           unset($_SESSION["new_tlf"]);
         }
         else
-        {
           $_SESSION["error"] = "No se ha podido registrar el nuevo usuario.";
-        }
       }
       else
         $_SESSION["error"] = "Ya existe un usuario con la dirección de correo indicada.";
     }
     else
-      $regStatus = "No se ha podido completar el registro.";
+      $_SESSION["error"] = "No se ha podido completar el registro.";
   }
   session_destroy();
 ?>
@@ -59,9 +59,14 @@
         if ($regStatus === "OK") {
           echo ('<p class="headers">Registro completado satisfactoriamente.<br>Bienvenida/o a nuestro centro, '.htmlentities($name).'.</p>');
         }
+        else {
+          echo ('<p class="error">'.$_SESSION["error"].'</p>');
+          unset($_SESSION["error"]);
+        }
       }
       else {
-        echo ('<p class="error">'.$regStatus.'</p>');
+        echo ('<p class="error">'.$_SESSION["error"].'</p>');
+        unset($_SESSION["error"]);
       }
      ?>
     <p class="headers"><a href="main.php">Volver al inicio.</a></p>

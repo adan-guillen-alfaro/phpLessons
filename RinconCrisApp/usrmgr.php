@@ -1,19 +1,25 @@
 <?php
 
-function hasAdminRights($pdo, $userId)
+function hasAdminRights($pdo, $email)
 {
   if ($pdo === null)
     return false;
 
   $sql = "SELECT admin FROM users WHERE eMail = :em";
   $stmt = $pdo->prepare($sql);
-  $stmt->execute(array(':em' => $userId));
+  $stmt->execute(array(':em' => $email));
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  //TODO
-  print_r($row);
+  if ($row === false)
+    return false;
 
-  return true;
+  try {
+      return ($row["admin"] === 1);
+  } catch (PDOException $e) {
+    return false;
+  }
+
+  return false;
 }
 
 function checkUser($pdo, $user, $pwd)
@@ -31,12 +37,23 @@ function existsUser($pdo, $email)
   if ($pdo === null)
     return false;
 
-    $sql = "SELECT eMail WHERE eMail=:eMail";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(':eMail' => $email)) ;
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    try {
+      $sql = "SELECT eMail FROM users WHERE eMail=:eMail";
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute(array(':eMail' => $email)) ;
 
-    return (count($s->fetchAll()) > 0);
+      $row = $stmt->fetch();
+
+      if ($row === false)
+        return false;
+
+      return (count($row) > 0);
+
+    } catch (PDOException $e) {
+      return false;
+    }
+
+    return false;
 }
 
 function registerUser($pdo, $name, $lastname, $mail, $pwd_plain, $direction, $cp, $city, $country, $tlf)
@@ -48,20 +65,24 @@ function registerUser($pdo, $name, $lastname, $mail, $pwd_plain, $direction, $cp
   $salt = 'XzyYx14*_';
   $pwd =  hash('md5', $salt.$pwd_plain);
 
-  print_r($pwd);
-
-  $sql = "INSERT INTO users (name, lastName, eMail, pwd, direction, cp, city, country, tlf, admin, tariff_id) VALUES (:name, :lastName, :eMail, :pwd, :direction, :cp, :city, :country, :tlf, :tariff_id)";
-  $stmt = $pdo->prepare($sql);
-  $stmt->execute(array(':name' => $name,
-                        ':lastName' => $lastname,
-                        ':eMail' => $mail,
-                        ':pwd' => $pwd,
-                        ':direction' => $direction,
-                        ':cp' => $cp,
-                        ':city' => $city,
-                        ':country' => $country,
-                        ':tlf' => $tlf,
-                        ':tariff_id' => $defaultTariff ));
+  try {
+    $sql = "INSERT INTO users (name, lastName, eMail, pwd, direction, cp, city, country, tlf, tariff_id) VALUES (:name, :lastName, :eMail, :pwd, :direction, :cp, :city, :country, :tlf, :tariff_id)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(':name' => $name,
+                          ':lastName' => $lastname,
+                          ':eMail' => $mail,
+                          ':pwd' => $pwd,
+                          ':direction' => $direction,
+                          ':cp' => $cp,
+                          ':city' => $city,
+                          ':country' => $country,
+                          ':tlf' => $tlf,
+                          ':tariff_id' => $defaultTariff ));
+    }
+    catch(PDOException $e) {
+      return "FALSE";
+    }
+    return "OK";
 }
 
 ?>
