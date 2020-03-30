@@ -17,8 +17,6 @@
         $regStatus = registerUser($pdo, $_SESSION["new_name"], $_SESSION["new_lastname"], $_SESSION["new_email"], $_SESSION["new_pwd"], $_SESSION["new_direction"], $_SESSION["new_cp"], $_SESSION["new_city"], $_SESSION["new_country"], $_SESSION["new_tlf"]);
         if ($regStatus === "OK")
         {
-          hasAdminRights($pdo, $_SESSION["new_email"]);
-          
           $name = $_SESSION["new_name"];
 
           unset($_SESSION["new_name"]);

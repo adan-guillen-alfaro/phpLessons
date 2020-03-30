@@ -57,7 +57,7 @@
       }
       else
       {
-        $salt = 'XyZzy12*_';
+        $salt = 'HwerqrT*_';
         $_SESSION["new_pwd"] = hash('md5', $salt.$_POST["new_pwd"]);
 
         unset($_SESSION["error"]);

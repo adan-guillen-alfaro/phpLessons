@@ -22,14 +22,30 @@ function hasAdminRights($pdo, $email)
   return false;
 }
 
-function checkUser($pdo, $user, $pwd)
+function checkUser($pdo, $email, $pwd_plain)
 {
-  $salt = 'XzyYx14*_';
-  $pwdhash =  hash('md5', $salt.$pwd);
-  //TODO: Comprobar si el usuario existe y el pass es correcto
+  $salt = 'HwerqrT*_';
+  $pwdhash =  hash('md5', $salt.$pwd_plain);
 
-  $_SESSION["activeUser"] = $user;
-  return true;
+  //TODO: Comprobar si el usuario existe y el pass es correcto
+  $sql = "SELECT pwd FROM users WHERE eMail = :em";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(':em' => $email));
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if ($row === false)
+    return false;
+
+  try {
+      if ($row["pwd"] === $pwdhash){
+        $_SESSION["activeUser"] = $email;
+        return true;
+      }
+  } catch (PDOException $e) {
+    return false;
+  }
+
+  return false;
 }
 
 function existsUser($pdo, $email)
@@ -56,14 +72,13 @@ function existsUser($pdo, $email)
     return false;
 }
 
-function registerUser($pdo, $name, $lastname, $mail, $pwd_plain, $direction, $cp, $city, $country, $tlf)
+function registerUser($pdo, $name, $lastname, $mail, $pwd_hash, $direction, $cp, $city, $country, $tlf)
 {
   if ($pdo === null)
     return false;
 
   $defaultTariff = 1;
-  $salt = 'XzyYx14*_';
-  $pwd =  hash('md5', $salt.$pwd_plain);
+
 
   try {
     $sql = "INSERT INTO users (name, lastName, eMail, pwd, direction, cp, city, country, tlf, tariff_id) VALUES (:name, :lastName, :eMail, :pwd, :direction, :cp, :city, :country, :tlf, :tariff_id)";
@@ -71,7 +86,7 @@ function registerUser($pdo, $name, $lastname, $mail, $pwd_plain, $direction, $cp
     $stmt->execute(array(':name' => $name,
                           ':lastName' => $lastname,
                           ':eMail' => $mail,
-                          ':pwd' => $pwd,
+                          ':pwd' => $pwd_hash,
                           ':direction' => $direction,
                           ':cp' => $cp,
                           ':city' => $city,
