@@ -5,15 +5,15 @@
 
   session_start();
 
-  if (!isset($_SESSION["activeUser"]))
+  if (!isset($_SESSION["activeUserId"]))
   {
     header("Location: login.php");
     return;
   }
 
   $isAdminUser = false;
-  if (isset($_SESSION["activeUser"]))
-    $isAdminUser = hasAdminRights($pdo, $_SESSION["activeUser"]);
+  if (isset($_SESSION["activeUserId"]))
+    $isAdminUser = hasAdminRights($pdo, $_SESSION["activeUserId"]);
 
   function getWeekDays()
   {
@@ -28,7 +28,7 @@
     return $schedule;
   }
 
-  function getDaySchedule($date)
+  function getDaySchedule($date, $userId)
   {
     //TODO: Select classes in database
 
@@ -87,12 +87,12 @@
 
         foreach ($week as $day)
         {
-          $schedule = getDaySchedule($day);
+          $schedule = getDaySchedule($pdo, $day, $_SESSION["activeUserId"]);
 
           echo('<div class="schedule">');
           if ($firstItem)
           {
-            echo('<p id="welcome" class="headers">Bienvenida/o '.htmlentities($_SESSION["activeUser"]).'.</p>');
+            echo('<p id="welcome" class="headers">Bienvenida/o '.htmlentities($_SESSION["activeUserName"]).'.</p>');
             $firstItem = false;
           }
 
@@ -110,9 +110,9 @@
             echo('<td>'.$apuntadas.'/'.$maximo.'</td>');
             echo('<td>');
             if ($assistance)
-              echo('<a class="schedule_button" href="removefromclass.php?classId='.$class['classId'].'&userId='.$_SESSION["activeUser"].'">Borrarse</a>');
+              echo('<a class="schedule_button" href="removefromclass.php?classId='.$class['classId'].'&userId='.$_SESSION["activeUserId"].'">Borrarse</a>');
             else if ($apuntadas < $maximo)
-              echo('<a class="schedule_button" href="addtoclass.php?classId='.$class['classId'].'&userId='.$_SESSION["activeUser"].'">Unirse</a>');
+              echo('<a class="schedule_button" href="addtoclass.php?classId='.$class['classId'].'&userId='.$_SESSION["activeUserId"].'">Unirse</a>');
 
             if ($isAdminUser)
             {

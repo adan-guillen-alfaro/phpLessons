@@ -5,69 +5,45 @@
 
   session_start();
 
-$_SESSION["error"] = "1";
-
   if (isset($_POST['register']))
   {
     header("Location: registerform.php");
     return;
   }
 
-  $_SESSION["error"] = "2";
-
   if (isset($_POST["user"]) && isset($_POST["pwd"]))
   {
-    unset($_SESSION["activeUser"]);
+    unset($_SESSION["activeUserId"]);
 
     $_SESSION["lastuser"] = $_POST["user"];
 
-    $_SESSION["error"] = "3";
-
     if (!filter_var($_SESSION["lastuser"], FILTER_VALIDATE_EMAIL))
     {
-      $_SESSION["error"] = "4";
-
       $_SESSION["error"] = "El usuario debe ser una dirección de correo válida.";
       header("Location: login.php");
       return;
     }
     else
     {
-      $_SESSION["error"] = "5";
-
-      if (checkUser($pdo, $_POST["user"], $_POST["pwd"]))
+      if (checkUserMailAndPwd($pdo, $_POST["user"], $_POST["pwd"]))
       {
-        $_SESSION["error"] = "6";
-
-        if (isset($_SESSION["activeUser"]))
+        if (isset($_SESSION["activeUserId"]))
         {
-          $_SESSION["error"] = "7";
-
           header("Location: main.php");
           return;
         }
         else
         {
-          $_SESSION["error"] = "8";
-
           header("Location: login.php");
           return;
         }
       }
       else
       {
-        $_SESSION["error"] = "9";
-
         header("Location: login.php");
         return;
       }
     }
-  }
-  else {
-    if (isset($_POST["user"]))
-      $_SESSION["error"] = "10";
-    else if (isset($_POST["pwd"]))
-      $_SESSION["error"] = "11";
   }
  ?>
  <html>

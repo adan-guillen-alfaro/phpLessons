@@ -12,7 +12,7 @@
   {
     if (strlen($_SESSION["new_name"]) > 0 && strlen($_SESSION["new_lastname"]) > 0 && strlen($_SESSION["new_email"]) > 0 && strlen($_SESSION["new_pwd"]) > 0)
     {
-      if (!existsUser($pdo, $_SESSION["new_email"]))
+      if (!existsUserEmail($pdo, $_SESSION["new_email"]))
       {
         $regStatus = registerUser($pdo, $_SESSION["new_name"], $_SESSION["new_lastname"], $_SESSION["new_email"], $_SESSION["new_pwd"], $_SESSION["new_direction"], $_SESSION["new_cp"], $_SESSION["new_city"], $_SESSION["new_country"], $_SESSION["new_tlf"]);
         if ($regStatus === "OK")

@@ -8,7 +8,7 @@
     header("Location: main.php");
     return;
   }
-  else if (isset($_SESSION["activeUser"]))
+  else if (isset($_SESSION["activeUserId"]))
   {
     session_destroy();
     session_start();

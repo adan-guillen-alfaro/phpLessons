@@ -3,7 +3,7 @@
 
   session_start();
 
-  if (!isset($_SESSION["activeUser"]))
+  if (!isset($_SESSION["activeUserId"]))
   {
     header("Location: login.php");
     return;

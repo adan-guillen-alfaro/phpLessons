@@ -31,6 +31,12 @@ CREATE TABLE users (
     eMail VARCHAR(64),
     pwd VARCHAR(32),
     tariff_id INT UNSIGNED,
+    direction VARCHAR(128),
+    cp VARCHAR(10),
+    city VARCHAR(64),
+    country VARCHAR(32),
+    tlf VARCHAR(32),
+    admin BOOLEAN DEFAULT false,
     CONSTRAINT FOREIGN KEY (tariff_id) REFERENCES tariffs (tariff_id),
     PRIMARY KEY (user_id)
     )

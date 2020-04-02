@@ -1,13 +1,13 @@
 <?php
 
-function hasAdminRights($pdo, $email)
+function hasAdminRights($pdo, $userId)
 {
   if ($pdo === null)
     return false;
 
-  $sql = "SELECT admin FROM users WHERE eMail = :em";
+  $sql = "SELECT admin FROM users WHERE user_id = :id";
   $stmt = $pdo->prepare($sql);
-  $stmt->execute(array(':em' => $email));
+  $stmt->execute(array(':id' => $userId));
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
   if ($row === false)
@@ -22,13 +22,13 @@ function hasAdminRights($pdo, $email)
   return false;
 }
 
-function checkUser($pdo, $email, $pwd_plain)
+function checkUserMailAndPwd($pdo, $email, $pwd_plain)
 {
   $salt = 'HwerqrT*_';
   $pwdhash =  hash('md5', $salt.$pwd_plain);
 
   //TODO: Comprobar si el usuario existe y el pass es correcto
-  $sql = "SELECT pwd FROM users WHERE eMail = :em";
+  $sql = "SELECT user_id, pwd, name FROM users WHERE eMail = :em";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(':em' => $email));
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -38,7 +38,9 @@ function checkUser($pdo, $email, $pwd_plain)
 
   try {
       if ($row["pwd"] === $pwdhash){
-        $_SESSION["activeUser"] = $email;
+        $_SESSION["activeUserId"] = $row[user_id];
+        $_SESSION["activeUserName"] = $row[name];
+        $_SESSION["activeUserEmail"] = $row[$email]; 
         return true;
       }
   } catch (PDOException $e) {
@@ -48,7 +50,7 @@ function checkUser($pdo, $email, $pwd_plain)
   return false;
 }
 
-function existsUser($pdo, $email)
+function existsUserEmail($pdo, $email)
 {
   if ($pdo === null)
     return false;
@@ -78,7 +80,6 @@ function registerUser($pdo, $name, $lastname, $mail, $pwd_hash, $direction, $cp,
     return false;
 
   $defaultTariff = 1;
-
 
   try {
     $sql = "INSERT INTO users (name, lastName, eMail, pwd, direction, cp, city, country, tlf, tariff_id) VALUES (:name, :lastName, :eMail, :pwd, :direction, :cp, :city, :country, :tlf, :tariff_id)";
