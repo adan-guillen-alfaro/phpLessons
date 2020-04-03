@@ -27,7 +27,7 @@ function checkUserMailAndPwd($pdo, $email, $pwd_plain)
   $salt = 'HwerqrT*_';
   $pwdhash =  hash('md5', $salt.$pwd_plain);
 
-  //TODO: Comprobar si el usuario existe y el pass es correcto
+  // Comprobar si el usuario existe y el pass es correcto
   $sql = "SELECT user_id, pwd, name FROM users WHERE eMail = :em";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(':em' => $email));
@@ -40,7 +40,7 @@ function checkUserMailAndPwd($pdo, $email, $pwd_plain)
       if ($row["pwd"] === $pwdhash){
         $_SESSION["activeUserId"] = $row[user_id];
         $_SESSION["activeUserName"] = $row[name];
-        $_SESSION["activeUserEmail"] = $row[$email]; 
+        $_SESSION["activeUserEmail"] = $row[$email];
         return true;
       }
   } catch (PDOException $e) {

@@ -23,17 +23,55 @@
 
     $schedule = array();
     for ($i = 0 ; $i < 7 ; $i++)
-      array_push($schedule, date('d/m/Y', time() + $daySecs * ($i - $curDay)));
+      array_push($schedule, date('Y-m-d', time() + $daySecs * ($i - $curDay)));
 
     return $schedule;
   }
 
-  function getDaySchedule($date, $userId)
+  function getAssistance($pdo, $classId)
+  {
+    $assistance = array();
+
+    $sql = "SELECT user_id FROM userClassHistory WHERE class_id = $classId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    while( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      array_push($assistance, $row['user_id']);
+    }
+
+    return $assistance;
+  }
+
+  function getDaySchedule($pdo, $date, $userId)
   {
     //TODO: Select classes in database
 
     $schedule = array();
 
+    $sql = "SELECT * FROM classes WHERE day = :date";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(':date' => $date));
+
+    while( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+
+        $classId = $row["class_id"];
+        $assistance = getAssistance($pdo, $classId);
+        $count = count($assistance);
+
+        $userAssist = false;
+        if (in_array($userId, $assistance))
+          $userAssist = true;
+
+        $class = array("title" => $row["tittle"]
+                          , "hour" => $row["hour"]
+                          , "apuntadas" => $count
+                          , "maximo" => $row["capacity"]
+                          , "classId" => $classId
+                          , "assistance" => $userAssist);
+
+        array_push($schedule, $class);
+    }
+/*
     $class = array("title" => "Pilates Studio"
                       , "hour" => date("9:00")
                       , "apuntadas" => 2
@@ -66,6 +104,7 @@
                       , "classId" => 4
                       , "assistance" => false);
     array_push($schedule, $class);
+    */
     return $schedule;
   }
  ?>
@@ -84,6 +123,9 @@
      <?php
         $week = getWeekDays();
         $firstItem = true;
+
+        if (isset($_SESSION["error"]))
+          print_r($_SESSION["error"]);
 
         foreach ($week as $day)
         {
