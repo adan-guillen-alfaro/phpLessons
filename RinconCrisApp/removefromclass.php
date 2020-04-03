@@ -2,18 +2,25 @@
   require_once 'isMobile.php';
   require_once 'pdo.php';
   require_once 'usrmgr.php';
-  
+
   session_start();
 
-  if (!isset($_GET['userId']) && !isset($_GET['classId']) && !isset($_SESSION['activeUser']))
+  if (!isset($_GET['classId']) && !isset($_SESSION['activeUserId']))
   {
     $_SESSION['error'] = 'No se ha podido realizar la petición. Por favor vuelva a intentarlo.';
   }
   else
   {
-    unset($_SESSION['error']);
-    header("Location: underConstruction.php");
+    removefromclass($pdo, $_GET['classId'], $_SESSION['activeUserId']);
+    header("Location: main.php");
     return;
+  }
+
+  function removefromclass($pdo, $classId, $userId)
+  {
+    $sql = "DELETE FROM userClassHistory WHERE class_id = $classId AND user_id = $userId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
   }
 ?>
 <html>

@@ -2,19 +2,28 @@
   require_once 'isMobile.php';
   require_once 'pdo.php';
   require_once 'usrmgr.php';
-  
+
   session_start();
 
-  if (!isset($_GET['userId']) && !isset($_GET['classId']) && !isset($_SESSION['activeUser']))
+  if (!isset($_GET['classId']) && !isset($_SESSION['activeUserId']))
   {
     $_SESSION['error'] = 'No se ha podido realizar la petición. Por favor vuelva a intentarlo.';
   }
   else
   {
-    unset($_SESSION['error']);
-    header("Location: underConstruction.php");
+    addToclass($pdo, $_GET['classId'], $_SESSION['activeUserId']);
+    header("Location: main.php");
     return;
   }
+
+  function addToclass($pdo, $classId, $userId)
+  {
+    $sql = "INSERT INTO userClassHistory (user_id, class_id) VALUES (:user, :class)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(':user' => $user_id,
+                          ':class' => $classId ));
+  }
+
 ?>
 <html>
   <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">

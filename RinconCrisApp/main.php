@@ -44,8 +44,6 @@
 
   function getDaySchedule($pdo, $date, $userId)
   {
-    //TODO: Select classes in database
-
     $schedule = array();
 
     $sql = "SELECT * FROM classes WHERE day = :date";
@@ -152,9 +150,9 @@
             echo('<td>'.$apuntadas.'/'.$maximo.'</td>');
             echo('<td>');
             if ($assistance)
-              echo('<a class="schedule_button" href="removefromclass.php?classId='.$class['classId'].'&userId='.$_SESSION["activeUserId"].'">Borrarse</a>');
+              echo('<a class="schedule_button" href="removefromclass.php?classId='.$class['classId'].'">Borrarse</a>');
             else if ($apuntadas < $maximo)
-              echo('<a class="schedule_button" href="addtoclass.php?classId='.$class['classId'].'&userId='.$_SESSION["activeUserId"].'">Unirse</a>');
+              echo('<a class="schedule_button" href="addtoclass.php?classId='.$class['classId'].'">Unirse</a>');
 
             if ($isAdminUser)
             {
