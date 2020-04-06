@@ -23,8 +23,6 @@
     }
 
     $classId = $_GET['classId'];
-
-    //unset($_SESSION['error']);
   }
 
   function getClassInfo($pdo, $classId)
@@ -72,21 +70,7 @@
       } catch (PDOException $e) {
       }
     }
-/*
-    $assistant = array("firstname" => "Fulanito"
-                      , "lastname" => "Menganito"
-                      , "e-mail" => "fulanito.menganito@rrr.com"
-                      , "userId" => 6);
 
-    array_push($assistance, $assistant);
-
-    $assistant = array("firstname" => "Pijus"
-                        , "lastname" => "Magnificus"
-                        , "e-mail" => "pijus.magnificus@spqr.com"
-                        , "userId" => 1);
-
-    array_push($assistance, $assistant);
-*/
     return $assistance;
 
   }
