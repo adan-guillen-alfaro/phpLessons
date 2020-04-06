@@ -10,7 +10,7 @@ function hasAdminRights($pdo, $userId)
   $stmt->execute(array(':id' => $userId));
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  if ($row === false)
+  if ($row == false)
     return 0;
 
   try {

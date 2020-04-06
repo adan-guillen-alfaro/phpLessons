@@ -2,6 +2,8 @@
   require_once 'isMobile.php';
   require_once 'pdo.php';
   require_once 'usrmgr.php';
+  require_once 'schedule.php';
+  require_once 'classmgr.php';
 
   session_start();
 
@@ -25,13 +27,23 @@
     //unset($_SESSION['error']);
   }
 
-  function getClassInfo($classId)
+  function getClassInfo($pdo, $classId)
   {
-    $class = array("title" => "Pilates Studio"
-                  , "day" => date("17/03/2020")
-                  , "hour" => date("9:00")
-                  , "assistance" => 2
-                  , "maximo" => 3);
+    $sql = "SELECT * FROM classes WHERE class_id = :classId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(':classId' => $classId));
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row == false)
+      return 0;
+
+    $assistance = getAssistance($pdo, $classId);
+
+    $class = array("title" => $row['tittle']
+                  , "day" => $row['day']
+                  , "hour" => $row['hour']
+                  , "assistance" => count($assistance)
+                  , "maximo" => $row['capacity']);
 
     return $class;
   }
@@ -60,7 +72,21 @@
       } catch (PDOException $e) {
       }
     }
+/*
+    $assistant = array("firstname" => "Fulanito"
+                      , "lastname" => "Menganito"
+                      , "e-mail" => "fulanito.menganito@rrr.com"
+                      , "userId" => 6);
 
+    array_push($assistance, $assistant);
+
+    $assistant = array("firstname" => "Pijus"
+                        , "lastname" => "Magnificus"
+                        , "e-mail" => "pijus.magnificus@spqr.com"
+                        , "userId" => 1);
+
+    array_push($assistance, $assistant);
+*/
     return $assistance;
 
   }
@@ -85,7 +111,7 @@
         unset($_SESSION["error"]);
       }
 
-      $classInfo = getClassInfo($classId);
+      $classInfo = getClassInfo($pdo, $classId);
 
       echo('<table width="100%" id="schedule"><tr><th>Nombre</th><th>Dia</th><th>Hora</th><th>Apuntados</th><th>Aforo</th></tr>');
       echo('<tr class="no_assisting_row">');
@@ -96,7 +122,7 @@
       echo('<td>'.$classInfo['maximo'].'</td>');
       echo('</tr></table></br></br>');
 
-      $classAssistance = getClassAssistance($classId);
+      $classAssistance = getClassAssistance($pdo, $classId);
 
       echo('<table width="100%" id="schedule"><tr><th>Nombre</th><th>Apellidos</th><th>e-mail</th><th></th></th></tr>');
       foreach ($classAssistance as $user)
