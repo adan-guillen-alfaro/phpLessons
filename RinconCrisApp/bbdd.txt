@@ -42,8 +42,10 @@ CREATE TABLE users (
     )
 
 CREATE TABLE userClassHistory (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id INT UNSIGNED,
   class_id INT UNSIGNED,
   CONSTRAINT FOREIGN KEY (user_id) REFERENCES users (user_id),
-  CONSTRAINT FOREIGN KEY (class_id) REFERENCES classes (class_id)
+  CONSTRAINT FOREIGN KEY (class_id) REFERENCES classes (class_id),
+  PRIMARY KEY (id)
 )

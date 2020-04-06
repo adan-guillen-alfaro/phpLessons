@@ -2,6 +2,7 @@
   require_once 'isMobile.php';
   require_once 'pdo.php';
   require_once 'usrmgr.php';
+  require_once 'classmgr.php';
 
   session_start();
 
@@ -15,15 +16,6 @@
     header("Location: main.php");
     return;
   }
-
-  function addToclass($pdo, $classId, $userId)
-  {
-    $sql = "INSERT INTO userClassHistory (user_id, class_id) VALUES (:user, :class)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(':user' => $user_id,
-                          ':class' => $classId ));
-  }
-
 ?>
 <html>
   <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">

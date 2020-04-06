@@ -5,7 +5,7 @@
 
   session_start();
 
-  if (!isset($_GET['classId']) && !isset($_SESSION['activeUser']))
+  if (!isset($_GET['classId']) || !isset($_SESSION['activeUserId']))
   {
     $_SESSION['error'] = 'No tiene credenciales para realizar esta operación.';
     header("Location: main.php");
@@ -13,7 +13,7 @@
   }
   else
   {
-    if (!hasAdminRights($_SESSION['activeUser']))
+    if (hasAdminRights($pdo, $_SESSION['activeUserId']) != 1)
     {
       $_SESSION['error'] = 'No tiene credenciales para realizar esta operación.';
       header("Location: main.php");
@@ -22,7 +22,7 @@
 
     $classId = $_GET['classId'];
 
-    unset($_SESSION['error']);
+    //unset($_SESSION['error']);
   }
 
   function getClassInfo($classId)
@@ -36,23 +36,30 @@
     return $class;
   }
 
-  function getClassAssistance($classId)
+  function getClassAssistance($pdo, $classId)
   {
+    $classAssistance = getAssistance($pdo, $classId);
+
     $assistance = array();
+    $count = count($classAssistance);
+    for ($i = 0; $i < $count ; $i++)
+    {
+      try {
+        $sql = "SELECT * FROM users WHERE user_id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array(':id' => $classAssistance[$i]));
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $assistant = array("firstname" => "Fulanito"
-                      , "lastname" => "Menganito"
-                      , "e-mail" => "fulanito.menganito@rrr.com"
-                      , "userId" => 6);
+        $assistant = array("firstname" => $row['name']
+                          , "lastname" => $row['lastName']
+                          , "e-mail" => $row['eMail']
+                          , "userId" => $classAssistance[$i]);
 
-    array_push($assistance, $assistant);
+        array_push($assistance, $assistant);
 
-    $assistant = array("firstname" => "Pijus"
-                        , "lastname" => "Magnificus"
-                        , "e-mail" => "pijus.magnificus@spqr.com"
-                        , "userId" => 1);
-
-    array_push($assistance, $assistant);
+      } catch (PDOException $e) {
+      }
+    }
 
     return $assistance;
 

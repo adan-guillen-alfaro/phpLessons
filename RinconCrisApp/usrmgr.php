@@ -11,15 +11,15 @@ function hasAdminRights($pdo, $userId)
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
   if ($row === false)
-    return false;
+    return 0;
 
   try {
-      return ($row["admin"] === 1);
+      return $row["admin"];
   } catch (PDOException $e) {
-    return false;
+    return 0;
   }
 
-  return false;
+  return 0;
 }
 
 function checkUserMailAndPwd($pdo, $email, $pwd_plain)

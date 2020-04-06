@@ -2,6 +2,7 @@
   require_once 'isMobile.php';
   require_once 'pdo.php';
   require_once 'usrmgr.php';
+  require_once 'classmgr.php';
 
   session_start();
 
@@ -11,9 +12,7 @@
     return;
   }
 
-  $isAdminUser = false;
-  if (isset($_SESSION["activeUserId"]))
-    $isAdminUser = hasAdminRights($pdo, $_SESSION["activeUserId"]);
+  $isAdminUser = hasAdminRights($pdo, $_SESSION["activeUserId"]);
 
   function getWeekDays()
   {
@@ -26,20 +25,6 @@
       array_push($schedule, date('Y-m-d', time() + $daySecs * ($i - $curDay)));
 
     return $schedule;
-  }
-
-  function getAssistance($pdo, $classId)
-  {
-    $assistance = array();
-
-    $sql = "SELECT user_id FROM userClassHistory WHERE class_id = $classId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    while( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-      array_push($assistance, $row['user_id']);
-    }
-
-    return $assistance;
   }
 
   function getDaySchedule($pdo, $date, $userId)
@@ -123,7 +108,10 @@
         $firstItem = true;
 
         if (isset($_SESSION["error"]))
-          print_r($_SESSION["error"]);
+        {
+          echo('<p class="error">'.$_SESSION["error"].'</p>');
+          unset($_SESSION["error"]);
+        }
 
         foreach ($week as $day)
         {
