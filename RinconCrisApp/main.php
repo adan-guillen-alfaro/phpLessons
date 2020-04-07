@@ -40,7 +40,7 @@
         foreach ($week as $day)
         {
           $schedule = getDaySchedule($pdo, $day, $_SESSION["activeUserId"]);
-
+          $userBonusExhausted = isUserBonusExhausted($pdo, $day, $_SESSION["activeUserId"]);
           echo('<div class="schedule">');
           if ($firstItem)
           {
@@ -63,7 +63,7 @@
             echo('<td>');
             if ($assistance)
               echo('<a class="schedule_button" href="removefromclass.php?classId='.$class['classId'].'">Borrarse</a>');
-            else if ($apuntadas < $maximo)
+            else if ($apuntadas < $maximo && !$userBonusExhausted)
               echo('<a class="schedule_button" href="addtoclass.php?classId='.$class['classId'].'">Unirse</a>');
 
             if ($isAdminUser)
@@ -72,7 +72,14 @@
             }
             echo('</td></tr>');
           }
-          echo('</table></div>');
+          echo('</table>');
+
+          if ($isAdminUser)
+          {
+              //echo('<a class="schedule_button" href="addclass.php">Añadir clases</a>');
+          }
+
+          echo('</div>');
         }
       ?>
      <p class="headers"><a href="logout.php">Log Out</a></p>

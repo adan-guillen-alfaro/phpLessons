@@ -101,4 +101,9 @@ function registerUser($pdo, $name, $lastname, $mail, $pwd_hash, $direction, $cp,
     return "OK";
 }
 
+function isUserBonusExhausted($pdo, $day, $userId)
+{
+  //// TODO:
+  return false;
+}
 ?>
