@@ -40,6 +40,7 @@
       }
       else
       {
+        $_SESSION["error"] = "Usuario y password incorrectos.";
         header("Location: login.php");
         return;
       }

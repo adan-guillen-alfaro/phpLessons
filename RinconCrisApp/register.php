@@ -30,7 +30,10 @@
           unset($_SESSION["new_tlf"]);
         }
         else
+        {
+          //$_SESSION["error"] = $regStatus;
           $_SESSION["error"] = "No se ha podido registrar el nuevo usuario.";
+        }
       }
       else
         $_SESSION["error"] = "Ya existe un usuario con la dirección de correo indicada.";

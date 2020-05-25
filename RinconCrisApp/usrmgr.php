@@ -96,7 +96,7 @@ function registerUser($pdo, $name, $lastname, $mail, $pwd_hash, $direction, $cp,
                           ':tariff_id' => $defaultTariff ));
     }
     catch(PDOException $e) {
-      return "FALSE";
+      return $e->getMessage();
     }
     return "OK";
 }

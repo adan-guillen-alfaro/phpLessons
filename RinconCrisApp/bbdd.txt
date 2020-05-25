@@ -49,3 +49,5 @@ CREATE TABLE userClassHistory (
   CONSTRAINT FOREIGN KEY (class_id) REFERENCES classes (class_id),
   PRIMARY KEY (id)
 )
+
+INSERT INTO `tariffs` (`tariff_id`, `name`, `rate`, `num_classes`, `period`) VALUES (NULL, 'General', '80', '2', 'WEEK');
