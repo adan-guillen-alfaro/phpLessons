@@ -44,9 +44,14 @@
           echo('<div class="schedule">');
           if ($firstItem)
           {
-            echo('<p id="welcome" class="headers">Bienvenida/o '.htmlentities($_SESSION["activeUserName"]).'.</p>');
             $firstItem = false;
+
+            echo('<p id="welcome" class="headers">Bienvenida/o '.htmlentities($_SESSION["activeUserName"]).'.</p>');
+
+            if ($isAdminUser)
+              echo(' <a class="schedule_button" href="adminclasses.php">Administrar</a>');
           }
+
 
           echo('<table width="100%" id="schedule"><tr><th>'.$day.'</th><th>Hora</th><th>Aforo</th><th></th>');
           foreach ($schedule as $class)
